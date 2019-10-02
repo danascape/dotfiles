@@ -71,4 +71,9 @@ help:
 	@echo  '  build-env	    - Install all dependencies (.deps/**/*)'
 	@echo  ''
 
+
+PHONY += shellcheck
+shellcheck:
+	while read -r script; do shellcheck --exclude=SC1090,SC1091 $$script; done < files
+
 .PHONY: $(PHONY)

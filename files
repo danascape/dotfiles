@@ -1,0 +1,3 @@
+.local/bin/fastboot
+.local/bin/adb
+.local/bin/build-rom
