@@ -1,0 +1,39 @@
+From dc102357cfc0a7bce58dac6ea1120447a3bebb53 Mon Sep 17 00:00:00 2001
+From: danascape <danascape@gmail.com>
+Date: Mon, 13 Feb 2023 00:23:36 +0530
+Subject: [PATCH] Makefile: Append extra kernel version to kernelversion
+
+* This was performed as a task for  Linux kernel Bug Fixing 2023
+  (Spring).
+
+Test: 'make kernelversion' and output with the appended string "LFX" in the
+       kernelversion "6.2.0-rc7-LFX"
+
+Signed-off-by: danascape <danascape@gmail.com>
+---
+ Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 80afd9fb9..92eaefb97 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,6 +3,7 @@ VERSION = 6
+ PATCHLEVEL = 2
+ SUBLEVEL = 0
+ EXTRAVERSION = -rc7
++NEW_EXTRAVERSION = -LFX
+ NAME = Hurr durr I'ma ninja sloth
+
+ # *DOCUMENTATION*
+@@ -381,7 +382,7 @@ include $(srctree)/scripts/Kbuild.include
+
+ # Read KERNELRELEASE from include/config/kernel.release (if it exists)
+ KERNELRELEASE = $(call read-file, include/config/kernel.release)
+-KERNELVERSION = $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SUBLEVEL)))$(EXTRAVERSION)
++KERNELVERSION = $(VERSION)$(if $(PATCHLEVEL),.$(PATCHLEVEL)$(if $(SUBLEVEL),.$(SUBLEVEL)))$(EXTRAVERSION)$(NEW_EXTRAVERSION)
+ export VERSION PATCHLEVEL SUBLEVEL KERNELRELEASE KERNELVERSION
+
+ include $(srctree)/scripts/subarch.include
+--
+2.39.1
