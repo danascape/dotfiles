@@ -1,0 +1,47 @@
+[user]
+	name = Saalim Quadri
+	email = danascape@gmail.com
+	signingkey = E897719615CE6C0CDCD323B9B1B8A27A8F8C4F16
+
+[commit]
+	gpgsign = true
+	verbose = true
+
+[alias]
+	aa = add
+	amend = commit --amend
+	amende = commit --amend --no-edit
+	cl = clone --bare
+	ci = commit
+	co = checkout
+	cp = cherry-pick
+	d = diff
+	f = fetch
+	fa = fetch --all
+	s = status
+	p = pull
+	w = worktree
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[core]
+	editor = nvim
+
+[credential]
+	helper = store
+
+[init]
+	defaultBranch = "main"
+
+[color]
+	ui = auto
+
+[http]
+	postBuffer = 524288000
+	maxRequestBuffer = 500M
+	lowSpeedLimit = 0
+	lowSpeedTime = 999999

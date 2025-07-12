@@ -1,3 +1,9 @@
+DIR = \
+	$$HOME/.local/bin
+
+FILES = \
+	$$HOME/.bash_eternal_history
+
 WORKAROUND_PACKAGES = \
 	'^liblz4-.*' \
 	'^liblzma.*' \
@@ -21,6 +27,12 @@ DEPS_DIR := .deps/$(DISTRO)
 
 PHONY := all
 all: build-env
+
+PHONY += links
+links:
+	mkdir -p $(DIR)
+	stow --verbose --restow --target=$$HOME .
+	touch $(FILES)
 
 PHONY += build-env
 build-env: base build-tools dev embedded mail
@@ -55,6 +67,7 @@ help:
 	@echo  ''
 	@echo  'Base targets:'
 	@echo  '  all		    - Build base and links targets'
+	@echo  '  links	            - Install the dotfiles links in $HOME using stow'
 	@echo  '  build-env	    - Install all dependencies (.deps/**/*)'
 	@echo  ''
 
