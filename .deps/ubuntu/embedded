@@ -1,0 +1,8 @@
+adb
+fastboot
+squashfs-tools
+pngcrush
+pngquant
+qemu-system-x86
+gcc-aarch64-linux-gnu
+gcc-arm-linux-gnueabi
