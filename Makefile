@@ -69,6 +69,8 @@ help:
 	@echo  '  all		    - Build base and links targets'
 	@echo  '  links	            - Install the dotfiles links in $HOME using stow'
 	@echo  '  build-env	    - Install all dependencies (.deps/**/*)'
+	@echo  '  shellcheck	    - Run shellchecks for scripts inside files'
+	@echo  '  shfmt     	    - Execute and save shfmt for scripts inside files'
 	@echo  ''
 
 
