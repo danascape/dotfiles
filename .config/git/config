@@ -21,7 +21,8 @@
 	fa = fetch --all
 	rev = revert
 	s = status
-	p = pull
+	p = push
+	pu = pull
 	w = worktree
 
 [filter "lfs"]
