@@ -18,6 +18,7 @@
 	d = diff
 	f = fetch
 	fa = fetch --all
+	rev = revert
 	s = status
 	p = pull
 	w = worktree
