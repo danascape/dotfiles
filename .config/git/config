@@ -8,7 +8,8 @@
 	verbose = true
 
 [alias]
-	aa = add
+	aa = add --all
+	a  = add
 	amend = commit --amend
 	amende = commit --amend --no-edit
 	cl = clone --bare
