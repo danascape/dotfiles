@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# Copyright (C) 2019 Saalim Quadri <danascape@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+set -euo pipefail
+
+usage()
+{
+	set +u
+	echo
+	case $1 in
+		*)
+			echo "usage: $0 [options] <command>"
+			echo
+			echo "A kernel source helper"
+			echo
+			echo "options:"
+			echo "  -h           Show this help message"
+			echo
+			echo "use $0 help <command> for more information about a command"
+			;;
+	esac
+	echo
+}
+
+while getopts ":h" opt; do
+	case "$opt" in
+		h)
+			usage
+			exit 0
+			;;
+		*)
+			usage
+			exit 1
+			;;
+	esac
+done
+shift $((OPTIND - 1))
+
+if [[ $# -eq 0 ]]; then
+	usage
+	exit 1
+fi
+
+# Subcommand
+SUBCMD="$1"
+shift
+
+case "$SUBCMD" in
+    help)
+        usage "$@"
+        ;;
+	*)
+		usage
+		;;
+esac
