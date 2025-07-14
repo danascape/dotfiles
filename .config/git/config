@@ -10,12 +10,12 @@
 [alias]
 	aa = add --all
 	a  = add
-	amend = commit --amend
-	amende = commit --amend --no-edit
+	amend = commit --amend -s
+	amende = commit --amend --no-edit -s
 	cl = clone --bare
-	ci = commit
+	ci = commit -s
 	co = checkout
-	cp = cherry-pick
+	cp = cherry-pick -s
 	d = diff
 	f = fetch
 	fa = fetch --all
