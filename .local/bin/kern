@@ -5,6 +5,52 @@
 
 set -euo pipefail
 
+# From https://github.com/danascape/scripts/commit/592d23398734ea39816bc32b7413852d2fee4c75
+# Checks if a directory is a kernel tree root
+#
+# @DIR A directory path
+#
+# Returns:
+# True if given dir is a kernel tree root and false otherwise.
+is_kernel_root()
+{
+	local -r DIR="$*"
+
+	# The following files are some of the files expected to be at a linux
+	# tree root and not expected to change. Their presence (or abscense)
+	# is used to tell if a directory is a linux tree root or not. (They
+	# are the same ones used by get_maintainer.pl)
+	if [[ -f "${DIR}/COPYING" && -f "${DIR}/CREDITS" && -f "${DIR}/Kbuild" && -e "${DIR}/MAINTAINERS" && -f "${DIR}/Makefile" && -f "${DIR}/README" && -d "${DIR}/Documentation" && -d "${DIR}/arch" && -d "${DIR}/include" && -d "${DIR}/drivers" && -d "${DIR}/fs" && -d "${DIR}/init" && -d "${DIR}/ipc" && -d "${DIR}/kernel" && -d "${DIR}/lib" && -d "${DIR}/scripts" ]]; then
+		return 0
+	fi
+	return 1
+}
+
+check_dtbs()
+{
+	if [[ $# -eq 0 ]]; then
+		echo "usage: $0 checkdtbs <DT_SCHEMA_PATH>"
+		exit 1
+	fi
+
+	DT_FILE="$1"
+	ARCH="arm arm64"
+	SCRIPTS_PATH="$HOME/scripts"
+
+	# Check if in a kernel tree root
+	if ! is_kernel_root "$PWD"; then
+		echo "error: Execute this command in a kernel tree."
+		exit 125
+	fi
+
+	for arch in $ARCH; do
+		echo "=== Building DTs for ARCH=$arch ==="
+		make -j"$(nproc --all)" O=out/"$arch" ARCH="$arch" defconfig
+		make -j"$(nproc --all)" O=out/"$arch" ARCH="$arch" dt_binding_check DT_SCHEMA_FILES="$DT_FILE"
+		make -j"$(nproc --all)" O=out/"$arch" ARCH="$arch" dtbs_check DT_SCHEMA_FILES="$DT_FILE"
+	done
+}
+
 usage()
 {
 	set +u
@@ -17,6 +63,9 @@ usage()
 			echo
 			echo "options:"
 			echo "  -h           Show this help message"
+			echo
+			echo "commands:"
+			echo "  checkdtbs    Run DT schema and DTB checks"
 			echo
 			echo "use $0 help <command> for more information about a command"
 			;;
@@ -48,6 +97,9 @@ SUBCMD="$1"
 shift
 
 case "$SUBCMD" in
+	checkdtbs)
+		check_dtbs "$@"
+		;;
     help)
         usage "$@"
         ;;
