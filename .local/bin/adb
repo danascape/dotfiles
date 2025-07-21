@@ -54,16 +54,16 @@ usage()
 	echo
 }
 
-while getopts ":vh" opt; do
-	case "$opt" in
-		v) VERBOSE=1 ;;
-		h)
+# Pass only -v and -h
+while [[ "$1" =~ ^- ]]; do
+	case "$1" in
+		-v) VERBOSE=1 ;;
+		-h)
 			usage
 			exit 0
 			;;
 		*)
-			usage
-			exit 1
+			break
 			;;
 	esac
 done
