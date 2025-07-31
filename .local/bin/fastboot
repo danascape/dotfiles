@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Path to real fastboot (adjust as needed)
-ORIGINAL_CMD="/usr/bin/fastboot"
+ORIGINAL_CMD="$HOME/platform-tools/fastboot"
 
 # Configuration
 VERBOSE=

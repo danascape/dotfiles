@@ -6,7 +6,7 @@
 set -euo pipefail
 
 # Path to real adb (adjust as needed)
-ORIGINAL_CMD="/usr/bin/adb"
+ORIGINAL_CMD="$HOME/platform-tools/adb"
 
 # Configuration
 VERBOSE=
