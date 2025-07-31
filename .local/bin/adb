@@ -91,6 +91,9 @@ case "$SUBCMD" in
 	r)
 		do_cmd root
 		;;
+	rr)
+		do_cmd reboot recovery
+		;;
 	sh)
 		do_cmd shell "$@"
 		;;
