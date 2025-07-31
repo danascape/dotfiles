@@ -91,6 +91,9 @@ case "$SUBCMD" in
 	r)
 		do_cmd root
 		;;
+	rb)
+		do_cmd reboot bootloader
+		;;
 	rr)
 		do_cmd reboot recovery
 		;;
