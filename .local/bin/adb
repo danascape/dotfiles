@@ -55,7 +55,7 @@ usage()
 }
 
 # Pass only -v and -h
-while [[ "$1" =~ ^- ]]; do
+while [[ $# -gt 0 && "$1" =~ ^- ]]; do
 	case "$1" in
 		-v) VERBOSE=1 ;;
 		-h)
