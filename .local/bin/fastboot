@@ -79,6 +79,9 @@ case "$SUBCMD" in
 	d)
 		do_cmd devices
 		;;
+	rr)
+		do_cmd reboot recovery
+		;;
 	*)
 		# Fallback: pass through to fastboot
 		do_cmd "$SUBCMD" "$@"
